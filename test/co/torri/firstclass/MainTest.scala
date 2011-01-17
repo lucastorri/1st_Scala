@@ -7,15 +7,15 @@ import org.scalatest.matchers.ShouldMatchers
 
 @RunWith(classOf[JUnitRunner])
 class ScalaSpec extends FlatSpec with ShouldMatchers {
-	
-	it should "iterate with closures over arrays" in {
-		
-		var strings = Array("a", " ", "string", " ", "array")
-		
-		var finalString = "" 
-		strings.foreach(s => finalString += s)
-		finalString should be ("a string array")
-	}
+
+    it should "iterate with closures over arrays" in {
+
+        var strings = Array("a", " ", "string", " ", "array")
+
+        var finalString = ""
+        strings.foreach(s => finalString += s)
+        finalString should be("a string array")
+    }
 
     it should "allow tail recursions" in {
         def factorial(x: Int) = {
@@ -25,17 +25,17 @@ class ScalaSpec extends FlatSpec with ShouldMatchers {
 
         factorial(100) should be(BigInt("93326215443944152681699238856266700490715968264381621468592963895217599993229915608941463976156518286253697920827223758251185210916864000000000000000000000000"))
     }
-    
-    it should "use call-by-value by default and call-by-name optionally" in {
-    	
-    	def loop: Int = loop
-    	
-    	def firstWithCallByValue(x: Int, y: Int) = x
-    	// infinite loop: firstWithCallByValue(1, loop)
 
-    	def firstWithCallByNameArg(x: Int, y: => Int) = x
-    	//infinite loop: firstWithCallByNameArg(loop, 1)
-    	firstWithCallByNameArg(1, loop) should be (1)
+    it should "use call-by-value by default and call-by-name optionally" in {
+
+        def loop: Int = loop
+
+        def firstWithCallByValue(x: Int, y: Int) = x
+        // infinite loop: firstWithCallByValue(1, loop)
+
+        def firstWithCallByNameArg(x: Int, y: => Int) = x
+        //infinite loop: firstWithCallByNameArg(loop, 1)
+        firstWithCallByNameArg(1, loop) should be(1)
     }
 
     it should "allow functions to return functions" in {
@@ -80,25 +80,47 @@ class ScalaSpec extends FlatSpec with ShouldMatchers {
     }
 
     it should "do pattern matching with case classes" in {
-    	
-    	class A
-    	case class B(n: Int) extends A
-    	case class C(s: String, n: Int) extends A
-    	case class D(o: AnyRef) extends A
-    	
-    	def matchCase(a: A): Int = {
-    		a match {
-    			case B(-1) => 1
-    			case B(n)  => 2 * n
-    			case C(s, n)  => 3 * s.length + n
-    			case D(_)  => 4
-    		}
-    	}
-    	
-    	matchCase(B(-1)) should be (1)
-    	matchCase(B(10)) should be (20)
-    	matchCase(C("txt", 5)) should be (14)
-    	matchCase(D(new AnyRef)) should be (4)
+
+        class A
+        case class B(n: Int) extends A
+        case class C(s: String, n: Int) extends A
+        case class D(o: AnyRef) extends A
+
+        def matchCase(a: A): Int = {
+            a match {
+                case B(-1) => 1
+                case B(n) => 2 * n
+                case C(s, n) => 3 * s.length + n
+                case D(_) => 4
+            }
+        }
+
+        matchCase(B(-1)) should be(1)
+        matchCase(B(10)) should be(20)
+        matchCase(C("txt", 5)) should be(14)
+        matchCase(D(new AnyRef)) should be(4)
+    }
+
+    it should "inference local variables when using generic methods" in {
+
+        def genericMethod[T](t: T) = t
+
+        var o = "string"
+        genericMethod[String](o) should be(o)
+        genericMethod(o) should be(o)
+    }
+
+    it should "have subtypes in generics" in {
+
+        abstract class A
+        case class B extends A
+        class Z[T <: A](a: T) {
+            def getA: T = a
+        }
+
+        var b = new B
+        var z = new Z[B](b)
+        z.getA should be(b)
     }
 
     it should "throw NoSuchElementException if an empty stack is popped" in {
