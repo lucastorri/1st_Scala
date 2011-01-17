@@ -4,27 +4,3 @@
 -------
 /Users/lucastorri/Documents/Workspace/1st_Scala/src/co/torri/firstclass/Main.scala -> /Users/lucastorri/Documents/Workspace/1st_Scala/bin/co/torri/firstclass/Main.class
 /Users/lucastorri/Documents/Workspace/1st_Scala/src/co/torri/firstclass/Main.scala -> /Users/lucastorri/Documents/Workspace/1st_Scala/bin/co/torri/firstclass/Main$.class
-/Users/lucastorri/Documents/Workspace/1st_Scala/test/co/torri/firstclass/MainTest.scala -> /Users/lucastorri/Documents/Workspace/1st_Scala/bin/co/torri/firstclass/ScalaSpec.class
-/Users/lucastorri/Documents/Workspace/1st_Scala/test/co/torri/firstclass/MainTest.scala -> /Users/lucastorri/Documents/Workspace/1st_Scala/bin/co/torri/firstclass/ScalaSpec$$anonfun$5$B$5$.class
-/Users/lucastorri/Documents/Workspace/1st_Scala/test/co/torri/firstclass/MainTest.scala -> /Users/lucastorri/Documents/Workspace/1st_Scala/bin/co/torri/firstclass/ScalaSpec$$anonfun$6$C$2.class
-/Users/lucastorri/Documents/Workspace/1st_Scala/test/co/torri/firstclass/MainTest.scala -> /Users/lucastorri/Documents/Workspace/1st_Scala/bin/co/torri/firstclass/ScalaSpec$$anonfun$2.class
-/Users/lucastorri/Documents/Workspace/1st_Scala/test/co/torri/firstclass/MainTest.scala -> /Users/lucastorri/Documents/Workspace/1st_Scala/bin/co/torri/firstclass/ScalaSpec$$anonfun$6$D$2.class
-/Users/lucastorri/Documents/Workspace/1st_Scala/test/co/torri/firstclass/MainTest.scala -> /Users/lucastorri/Documents/Workspace/1st_Scala/bin/co/torri/firstclass/ScalaSpec$$anonfun$5$A$1.class
-/Users/lucastorri/Documents/Workspace/1st_Scala/test/co/torri/firstclass/MainTest.scala -> /Users/lucastorri/Documents/Workspace/1st_Scala/bin/co/torri/firstclass/ScalaSpec$$anonfun$7.class
-/Users/lucastorri/Documents/Workspace/1st_Scala/test/co/torri/firstclass/MainTest.scala -> /Users/lucastorri/Documents/Workspace/1st_Scala/bin/co/torri/firstclass/ScalaSpec$$anonfun$4.class
-/Users/lucastorri/Documents/Workspace/1st_Scala/test/co/torri/firstclass/MainTest.scala -> /Users/lucastorri/Documents/Workspace/1st_Scala/bin/co/torri/firstclass/ScalaSpec$$anonfun$7$$anonfun$apply$mcV$sp$4.class
-/Users/lucastorri/Documents/Workspace/1st_Scala/test/co/torri/firstclass/MainTest.scala -> /Users/lucastorri/Documents/Workspace/1st_Scala/bin/co/torri/firstclass/ScalaSpec$$anonfun$5.class
-/Users/lucastorri/Documents/Workspace/1st_Scala/test/co/torri/firstclass/MainTest.scala -> /Users/lucastorri/Documents/Workspace/1st_Scala/bin/co/torri/firstclass/ScalaSpec$$anonfun$6.class
-/Users/lucastorri/Documents/Workspace/1st_Scala/test/co/torri/firstclass/MainTest.scala -> /Users/lucastorri/Documents/Workspace/1st_Scala/bin/co/torri/firstclass/ScalaSpec$$anonfun$1$$anonfun$apply$mcV$sp$3.class
-/Users/lucastorri/Documents/Workspace/1st_Scala/test/co/torri/firstclass/MainTest.scala -> /Users/lucastorri/Documents/Workspace/1st_Scala/bin/co/torri/firstclass/ScalaSpec$$anonfun$6$A$2.class
-/Users/lucastorri/Documents/Workspace/1st_Scala/test/co/torri/firstclass/MainTest.scala -> /Users/lucastorri/Documents/Workspace/1st_Scala/bin/co/torri/firstclass/ScalaSpec$$anonfun$6$B$6$.class
-/Users/lucastorri/Documents/Workspace/1st_Scala/test/co/torri/firstclass/MainTest.scala -> /Users/lucastorri/Documents/Workspace/1st_Scala/bin/co/torri/firstclass/ScalaSpec$$anonfun$6$C$3$.class
-/Users/lucastorri/Documents/Workspace/1st_Scala/test/co/torri/firstclass/MainTest.scala -> /Users/lucastorri/Documents/Workspace/1st_Scala/bin/co/torri/firstclass/ScalaSpec$$anonfun$3.class
-/Users/lucastorri/Documents/Workspace/1st_Scala/test/co/torri/firstclass/MainTest.scala -> /Users/lucastorri/Documents/Workspace/1st_Scala/bin/co/torri/firstclass/ScalaSpec$$anonfun$4$$anonfun$sumSquares$1$1.class
-/Users/lucastorri/Documents/Workspace/1st_Scala/test/co/torri/firstclass/MainTest.scala -> /Users/lucastorri/Documents/Workspace/1st_Scala/bin/co/torri/firstclass/ScalaSpec$$anonfun$6$B$3.class
-/Users/lucastorri/Documents/Workspace/1st_Scala/test/co/torri/firstclass/MainTest.scala -> /Users/lucastorri/Documents/Workspace/1st_Scala/bin/co/torri/firstclass/ScalaSpec$$anonfun$3$$anonfun$apply$mcV$sp$1.class
-/Users/lucastorri/Documents/Workspace/1st_Scala/test/co/torri/firstclass/MainTest.scala -> /Users/lucastorri/Documents/Workspace/1st_Scala/bin/co/torri/firstclass/ScalaSpec$$anonfun$4$$anonfun$sum1$1$1.class
-/Users/lucastorri/Documents/Workspace/1st_Scala/test/co/torri/firstclass/MainTest.scala -> /Users/lucastorri/Documents/Workspace/1st_Scala/bin/co/torri/firstclass/ScalaSpec$$anonfun$5$B$4.class
-/Users/lucastorri/Documents/Workspace/1st_Scala/test/co/torri/firstclass/MainTest.scala -> /Users/lucastorri/Documents/Workspace/1st_Scala/bin/co/torri/firstclass/ScalaSpec$$anonfun$4$$anonfun$apply$mcV$sp$2.class
-/Users/lucastorri/Documents/Workspace/1st_Scala/test/co/torri/firstclass/MainTest.scala -> /Users/lucastorri/Documents/Workspace/1st_Scala/bin/co/torri/firstclass/ScalaSpec$$anonfun$6$D$3$.class
-/Users/lucastorri/Documents/Workspace/1st_Scala/test/co/torri/firstclass/MainTest.scala -> /Users/lucastorri/Documents/Workspace/1st_Scala/bin/co/torri/firstclass/ScalaSpec$$anonfun$1.class

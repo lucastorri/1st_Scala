@@ -7,6 +7,7 @@ import org.scalatest.matchers.ShouldMatchers
 
 @RunWith(classOf[JUnitRunner])
 class ScalaSpec extends FlatSpec with ShouldMatchers {
+    //based on: http://www.scala-lang.org/docu/files/ScalaByExample.pdf
 
     it should "iterate with closures over arrays" in {
 
@@ -15,6 +16,13 @@ class ScalaSpec extends FlatSpec with ShouldMatchers {
         var finalString = ""
         strings.foreach(s => finalString += s)
         finalString should be("a string array")
+    }
+
+    it should "have object declarations" in {
+
+        object NewObject
+
+        (NewObject) should be(NewObject)
     }
 
     it should "allow tail recursions" in {
@@ -121,6 +129,21 @@ class ScalaSpec extends FlatSpec with ShouldMatchers {
         var b = new B
         var z = new Z[B](b)
         z.getA should be(b)
+
+        /**
+         * View bounds <% are weaker than plain bounds <:: A view bounded type parameter
+         * clause [A <% T] only speciÞes that the bounded type A must be convertible to the
+         * bound type T, using an implicit conversion.
+         */
+    }
+
+    //take a better look on 8.2 Variance Annotation and 8.3 Lower Bounds
+    
+    it should "have tuples \o/" in {
+    	var tuple4 = (1, 3.2, "text", true)
+    	
+    	tuple4 should be (new Tuple4(1, 3.2, "text", true))
+    	tuple4.getClass.getSimpleName should be ("Tuple4")
     }
 
     it should "throw NoSuchElementException if an empty stack is popped" in {
