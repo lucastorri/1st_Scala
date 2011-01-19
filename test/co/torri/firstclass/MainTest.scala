@@ -138,16 +138,139 @@ class ScalaSpec extends FlatSpec with ShouldMatchers {
     }
 
     //take a better look on 8.2 Variance Annotation and 8.3 Lower Bounds
-    
-    it should "have tuples \o/" in {
-    	var tuple4 = (1, 3.2, "text", true)
-    	
-    	tuple4 should be (new Tuple4(1, 3.2, "text", true))
-    	tuple4.getClass.getSimpleName should be ("Tuple4")
+
+    it should "have tuples" in {
+        var tuple2 = (true, false)
+        tuple2 should be(new Tuple2[Boolean, Boolean](true, false))
+        tuple2.getClass.getSimpleName should be("Tuple2")
+
+        var tuple4 = (1, 3.2, "text", true)
+        tuple4 should be(new Tuple4[Int, Double, String, Boolean](1, 3.2, "text", true))
+        tuple4.getClass.getSimpleName should be("Tuple4")
+
+        //max tested tuple size possible: 22 => new Tuple22[Int, ...]
+        
+        var (x,y) = (1,2)
+        x should be (1)
+        y should be (2)
     }
 
-    it should "throw NoSuchElementException if an empty stack is popped" in {
-        evaluating { throw new Exception } should produce[Exception]
+    it should "have functions and closures" in {
+
+        var times: ((Int, Int) => Int) = (a, b) => a * b
+
+        times(4, 5) should be(20)
+
+        var times7: (Int => Int) = times(_, 7)
+
+        times7(5) should be(35)
+
+        var times9 = (x: Int) => times(x, 9)
+
+        times9(10) should be(90)
     }
+
+    it should "have lists" in {
+
+        var emptyList = Nil
+        emptyList should be(List())
+
+        var stringList = "Crazy way" :: "to create" :: "a list" :: Nil
+        stringList should be(List("Crazy way", "to create", "a list"))
+
+        var intList = 1 :: 2 :: 3 :: Nil
+        intList.head should be(1)
+        intList.tail should be(2 :: 3 :: Nil)
+
+        var anotherWayToCreateTheIntList = 1 :: List(2, 3)
+        intList should be(anotherWayToCreateTheIntList)
+
+        List(1, 2, 3) ::: List(4, 5, 6) should be(List(1, 2, 3, 4, 5, 6))
+    }
+
+    it should "match case lists" in {
+        def isEmpty(l: List[Any]): Boolean = l match {
+            case Nil => true
+            case x :: xs => false
+        }
+
+        isEmpty(List()) should be(true)
+        isEmpty(List(1)) should be(false)
+
+        def matchFullList(l: List[Int]) = l match {
+            case (1 :: 2 :: 3 :: Nil) => 1
+            case (3 :: tail) => 2
+            case (_ :: Nil) => 3
+            case _ => 4
+        }
+
+        matchFullList(List(1, 2, 3)) should be(1)
+        matchFullList(List(3)) should be(2)
+        matchFullList(List(3, 2)) should be(2)
+        matchFullList(List(3, 2, 1)) should be(2)
+        matchFullList(List(4)) should be(3)
+        matchFullList(List(5)) should be(3)
+        matchFullList(List()) should be(4)
+        matchFullList(List(1, 2)) should be(4)
+        matchFullList(List(1, 3, 2)) should be(4)
+
+        def last[T](l: List[T]): T = l match {
+            case Nil => error("Nil.last")
+            case e :: Nil => e
+            case _ :: tail => last(tail)
+        }
+
+        evaluating { last(List()) } should produce[RuntimeException]
+        last(List(1)) should be(1)
+        last(List(1, 2)) should be(2)
+        last(List(1, 2, 3, 4, 5, 6)) should be(6)
+    }
+
+    it should "have for loops iterating over lists" in {
+
+        case class Person(age: Int)
+        var persons = Person(10) :: Person(20) :: Person(30) :: Person(40) :: Nil
+
+        (for (p <- persons) yield p) should be(persons)
+
+        (for (p <- persons if p.age > 20) yield p) should be(Person(30) :: Person(40) :: Nil)
+
+        (for (p <- persons if p.age == 20) yield p) should be(Person(20) :: Nil)
+
+        var yieldedTuples = for {
+            i <- List.range(0, 2)
+            j <- List.range(3, 5)
+        } yield (i, j)
+        yieldedTuples should be((0, 3) :: (0, 4) :: (1, 3) :: (1, 4) :: Nil)
+
+        def isOdd(x: Int) = x % 2 == 1
+        yieldedTuples = for (i <- List.range(0, 2); j <- List.range(3, 5); if isOdd(i + j)) yield (i, j)
+        yieldedTuples should be((0, 3) :: (1, 4) :: Nil)
+
+        /*
+    	 * Or, to Þnd the names of all authors that have written at least two books in the database:
+		 * for (b1 <- books; b2 <- books if b1 != b2;
+		 * 		a1 <- b1.authors; a2 <- b2.authors if a1 == a2) yield a1
+    	 */
+    }
+
+    it should "use underscore to initialize variables with default values" in {
+
+        object DefaultValues {
+            var a: AnyRef = _
+            var s: String = _
+            var b: Boolean = _
+            var i: Int = _
+            var d: Double = _
+        }
+
+        DefaultValues.a should be (null)
+        DefaultValues.s should be (null)
+        DefaultValues.b should be (false)
+        DefaultValues.i should be (0)
+        DefaultValues.d should be (0.0)
+    }
+    
+    lazy var v = 10000000 * 100000000
 
 }
