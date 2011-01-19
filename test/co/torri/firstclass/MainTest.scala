@@ -1,5 +1,6 @@
 package co.torri.firstclass
 
+import java.io.IOException
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.FlatSpec
@@ -153,6 +154,15 @@ class ScalaSpec extends FlatSpec with ShouldMatchers {
         var (x,y) = (1,2)
         x should be (1)
         y should be (2)
+        
+        (1,2,3) match {
+        	case (i,j,k) => {
+        		i should be (1)
+        		j should be (2)
+        		k should be (3)
+        	}
+        	//unreachable code: case _ => error("should not happen")
+        }
     }
 
     it should "have functions and closures" in {
@@ -168,6 +178,19 @@ class ScalaSpec extends FlatSpec with ShouldMatchers {
         var times9 = (x: Int) => times(x, 9)
 
         times9(10) should be(90)
+        
+        object SomeFunc extends Function1[Int, String] {
+        	def apply(i) = i.toString
+        }
+        SomeFunc.apply(13) should be ("13")
+        
+        def callblock[T](v: => T	) = v
+        callblock {
+        	var x = 3
+        	var y = 7
+        	x * y
+        } should be (21)
+        (callblock {}).isInstanceOf[Unit] should be (true) 
     }
 
     it should "have lists" in {
@@ -252,6 +275,8 @@ class ScalaSpec extends FlatSpec with ShouldMatchers {
 		 * for (b1 <- books; b2 <- books if b1 != b2;
 		 * 		a1 <- b1.authors; a2 <- b2.authors if a1 == a2) yield a1
     	 */
+        
+        (for (i <- (1 until 10) if i % 2 == 0) yield i) should be (Vector(2, 4, 6, 8))
     }
 
     it should "use underscore to initialize variables with default values" in {
@@ -271,6 +296,53 @@ class ScalaSpec extends FlatSpec with ShouldMatchers {
         DefaultValues.d should be (0.0)
     }
     
-    lazy var v = 10000000 * 100000000
+    it should "have lazy values" in {
+
+    	case object NormalVal {
+    		var multiplyFactor = 5
+    		val v = 10 * multiplyFactor
+    	}
+    	NormalVal.multiplyFactor should be (5)
+    	NormalVal.multiplyFactor = 7
+    	NormalVal.v should be (50)
+    	
+    	case object LazyVal {
+    		var multiplyFactor = 5
+    		lazy val v = 10 * multiplyFactor
+    	}
+    	LazyVal.multiplyFactor should be (5)
+    	LazyVal.multiplyFactor = 7
+    	LazyVal.v should be (70)
+    }
+    
+    it should "have multiline strings" in {
+    	
+    	var multilineString = """This
+is a
+multiline string"""
+    	multilineString should be ("This\nis a\nmultiline string")
+    }
+
+    /**
+     * Since Scala has no checked exceptions, Scala methods must be annotated with one or more throws annotations such that Java code can catch exceptions thrown by a Scala method.
+     */
+    
+    it should "have compound types" in {
+    	trait A
+    	trait B
+    	trait C
+    	type T = A with B with C
+    	
+    	class D extends A with B with C
+    	//does not work: class E extends T
+    	
+    	var d = new D
+    	d.isInstanceOf[T] should be (true)
+    	
+    	def someMethodWithTypeT(t: T) = t
+    	
+    	someMethodWithTypeT(d) should be (d)
+    }
 
 }
+//http://stackoverflow.com/questions/2335319/what-are-the-relationships-between-any-anyval-anyref-object-and-how-do-they-ma
