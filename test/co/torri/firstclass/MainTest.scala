@@ -5,6 +5,13 @@ import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.FlatSpec
 import org.scalatest.matchers.ShouldMatchers
+/*
+import p._         all members of p (this is analogous to import p.* in Java).
+import p.x	       the member x of p.
+import p.{x => a}  the member x of p renamed as a.
+import p.{x, y}    the members x and y of p.
+import p1.p2.z     the member z of p2, itself member of p1.
+*/
 
 @RunWith(classOf[JUnitRunner])
 class ScalaSpec extends FlatSpec with ShouldMatchers {
@@ -184,13 +191,23 @@ class ScalaSpec extends FlatSpec with ShouldMatchers {
         }
         SomeFunc.apply(13) should be ("13")
         
-        def callblock[T](v: => T	) = v
+        def callblock[T](v: => T) = v
         callblock {
         	var x = 3
         	var y = 7
         	x * y
         } should be (21)
-        (callblock {}).isInstanceOf[Unit] should be (true) 
+        (callblock {}).isInstanceOf[Unit] should be (true)
+        
+        
+        def modN(n: Int)(x: Int) = x % n
+        val mod3: Int => Int = modN(3)
+		val mod5: Int => Int = modN(5)
+		
+		mod3(7) should be (1)
+		mod3(7) should be (modN(3)(7))
+		mod5(12) should be (2)
+		mod5(12) should be (modN(5)(12))
     }
 
     it should "have lists" in {
@@ -342,6 +359,19 @@ multiline string"""
     	def someMethodWithTypeT(t: T) = t
     	
     	someMethodWithTypeT(d) should be (d)
+    }
+    
+    it should "do matches with class types" in {
+    	class A
+    	class B
+    	
+    	def matchClass(o: AnyRef) = o match {
+    		case _: A => 1
+    		case _: B => 2
+    	}
+    	
+    	matchClass(new A) should be (1)
+    	matchClass(new B) should be (2)
     }
 
 }
