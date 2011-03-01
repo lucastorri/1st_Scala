@@ -1,0 +1,5 @@
+https://github.com/robey/kestrel
+https://github.com/mdr/scalariform
+https://github.com/szeiger/scala-query
+http://www.assembla.com/wiki/show/metascala
+http://akka.io/
